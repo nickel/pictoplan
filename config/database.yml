@@ -12,8 +12,7 @@ development:
   database: pictoplan_development
 
 test:
-  <<: *default
-  database: pictoplan_test
+  url: <%= ENV["DATABASE_URL"] %>
 
 production:
   <<: *default
