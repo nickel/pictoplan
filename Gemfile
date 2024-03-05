@@ -21,6 +21,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "brakeman"
   gem "rubocop"
   gem "web-console"
 end
