@@ -22,6 +22,7 @@ end
 
 group :development do
   gem "brakeman"
+  gem "bundler-audit"
   gem "rubocop"
   gem "web-console"
 end
