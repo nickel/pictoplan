@@ -7,52 +7,6 @@ on:
     branches: [ main ]
 
 jobs:
-  check-security:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Scan for security vulnerabilities
-        run: bin/check-security
-
-  check-style:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bin/check-style
-
-  check-libraries:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bin/check-libraries
-
   test:
     runs-on: ubuntu-latest
     services:
@@ -77,10 +31,29 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Configure DB
+        env:
+          RAILS_ENV: "test"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
+        run: bin/rails db:setup
+
+      - name: Scan for security vulnerabilities
+        run: bin/check-security
+
+      - name: Lint code for consistent style
+        run: bin/check-style
+
+      - name: Audit dependencies
+        run: bin/check-libraries
+
+      - name: Prevent packages' boundaries violations
+        env:
+          RAILS_ENV: "test"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
+        run: bin/check-packages
+
       - name: Run Tests
         env:
           RAILS_ENV: "test"
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
-        run: |
-          bin/rails db:setup
-          bin/rails test:all
+        run: bin/rails test:all
