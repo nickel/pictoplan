@@ -19,6 +19,8 @@ services:
       - .:/rails
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres/pictoplan_test
     depends_on:
       postgres:
         condition: service_healthy
