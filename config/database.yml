@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: pictoplan_development
+  url: <%= ENV["DATABASE_URL"] %>
 
 test:
   url: <%= ENV["DATABASE_URL"] %>
