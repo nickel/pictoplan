@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pictoplan</title>
+    <title>PictoPlan</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "application", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <main class="container mx-auto mt-5 px-5">
-      <h1 class="text-3xl font-bold">
-        PictoPlan
+    <header class="container mx-auto mt-5 px-5">
+      <h1 class="text-4xl font-bold">
+        <%= link_to "PictoPlan", root_path %>
       </h1>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
 
       <% if user_signed_in? %>
         <p>
-          Signed with: <strong><%= current_user.email %></strong>
-          <%= link_to "Logout", destroy_user_session_path, data: { "turbo-method": :delete } %>
+          <span class="font-bold"><%= current_user.email %></span> |
+          <%= link_to "Sign out", destroy_user_session_path, data: { "turbo-method": :delete } %>
         </p>
+      <% end %>
+    </header>
+    <main class="container mx-auto mt-5 px-5">
+      <% if notice %>
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+          <%= alert %>
+        </div>
       <% end %>
 
       <%= yield %>
