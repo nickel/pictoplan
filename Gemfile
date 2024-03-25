@@ -23,6 +23,7 @@ end
 group :development do
   gem "brakeman"
   gem "bundler-audit"
+  gem "foreman"
   gem "rubocop"
   gem "spring"
   gem "web-console"
