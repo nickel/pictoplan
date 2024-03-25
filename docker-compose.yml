@@ -17,6 +17,8 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - .:/rails
+    command: "bin/dev"
+    tty: true
     ports:
       - "3000:3000"
     environment:

@@ -115,6 +115,7 @@ GEM
       reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.12.0)
+    foreman (0.87.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.4)
@@ -298,6 +299,7 @@ DEPENDENCIES
   bundler-audit
   capybara
   debug
+  foreman
   importmap-rails
   jbuilder
   packwerk (~> 3.2)
