@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_195456) do
   create_table "plans", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "name"
-    t.integer "status", default: 0
+    t.boolean "active", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_plans_on_account_id"
