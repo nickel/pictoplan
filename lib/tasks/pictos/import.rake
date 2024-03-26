@@ -3,12 +3,10 @@
 namespace :pictos do
   desc "Import pictos"
   task import: :environment do
-    Picto.destroy_all
-
     Dir.foreach(Rails.root.join("vendor/pictos")) do |filename|
       next if [".", ".."].include?(filename)
 
-      data = eval(File.read(Rails.root.join("vendor/pictos", filename, "data.json")))
+      data = JSON.parse(File.read(Rails.root.join("vendor/pictos", filename, "data.json")))
       image = Rails.root.join("vendor/pictos", filename, "image.png")
 
       keyword = data["keywords"].first["keyword"]
