@@ -34,7 +34,7 @@ jobs:
       - name: Configure DB
         env:
           RAILS_ENV: "test"
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan"
         run: bin/rails db:setup
 
       - name: Scan for security vulnerabilities
@@ -49,11 +49,11 @@ jobs:
       - name: Prevent packages' boundaries violations
         env:
           RAILS_ENV: "test"
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan"
         run: bin/check-packages
 
       - name: Run Tests
         env:
           RAILS_ENV: "test"
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan_test"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/pictoplan"
         run: bin/rails test:all

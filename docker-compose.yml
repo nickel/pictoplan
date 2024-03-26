@@ -22,7 +22,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres/pictoplan_development
+      DATABASE_URL: postgres://postgres:postgres@postgres/pictoplan
     depends_on:
       postgres:
         condition: service_healthy

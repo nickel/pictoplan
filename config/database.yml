@@ -9,10 +9,10 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  url: <%= ENV["DATABASE_URL"] %>_development
 
 test:
-  url: <%= ENV["DATABASE_URL"] %>
+  url: <%= ENV["DATABASE_URL"] %>_test
 
 production:
   <<: *default
