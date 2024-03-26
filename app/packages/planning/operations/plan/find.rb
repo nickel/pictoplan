@@ -11,8 +11,10 @@ class Plan::Find < CommandHandler::Command
     validates :plan_id, presence: true
   end
 
+  delegate :account_id, :plan_id, to: :form
+
   def execute
-    if (plan = Plan.find_by(account_id:, plan_id:))
+    if (plan = Plan.find_by(id: plan_id, account_id:))
       Response.success(plan.to_struct)
     else
       Response.failure(

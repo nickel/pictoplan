@@ -11,22 +11,22 @@ class Plan::Activate < CommandHandler::Command
     validates :plan_id, presence: true
   end
 
-  def execute
-    if (plan = Plan.find_by(account_id:, plan_id:))
-      Plan
-        .where(account_id:)
-        .update(active: false)
+  delegate :account_id, :plan_id, to: :form
 
-      plan
-        .update_with_response(active: true)
-        .and_then do |updated_plan|
-          Response.success(updated_plan.to_struct)
-        end
-    else
-      Response.failure(
-        Errors::RecordNotFoundError
-          .build(form:)
-      )
-    end
+  def execute
+    Plan::Find
+      .call(account_id:, plan_id:)
+      .and_then do
+        Plan
+          .where(account_id:)
+          .update(active: false)
+
+        Plan
+          .find_by(id: plan_id)
+          .update_with_response(active: true)
+          .and_then do |updated_plan|
+            Response.success(updated_plan.to_struct)
+          end
+      end
   end
 end

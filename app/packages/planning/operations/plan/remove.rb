@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Plan::Find < CommandHandler::Command
+class Plan::Remove < CommandHandler::Command
   class Form
     include CommandHandler::Form
 
@@ -11,16 +11,17 @@ class Plan::Find < CommandHandler::Command
     validates :plan_id, presence: true
   end
 
-  def execute
-    if (plan = Plan.find_by(account_id:, plan_id:))
-      plan.destroy_with_response
+  delegate :account_id, :plan_id, to: :form
 
-      Response.success(plan.to_struct)
-    else
-      Response.failure(
-        Errors::RecordNotFoundError
-          .build(form:)
-      )
-    end
+  def execute
+    Plan::Find
+      .call(account_id:, plan_id:)
+      .and_then do |plan|
+        Response.success(
+          Plan
+            .destroy(plan.id)
+            .to_struct
+        )
+      end
   end
 end

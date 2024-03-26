@@ -11,12 +11,14 @@ class Plan::Create < CommandHandler::Command
     validates :name, presence: true
   end
 
+  delegate :account_id, :name, to: :form
+
   def execute
     Plan
-      .new(
-        account_id:,
-        name:,
-        status: Plan::AVAILABLE
-      ).save_with_response
+      .new(account_id:, name:)
+      .save_with_response
+      .and_then do |plan|
+        Response.success(plan.to_struct)
+      end
   end
 end

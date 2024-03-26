@@ -5,6 +5,6 @@ class Plan < ApplicationRecord
 
   def to_struct
     CustomStruct
-      .new(attributes)
+      .new(attributes.merge(active?: active))
   end
 end

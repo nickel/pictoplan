@@ -13,17 +13,18 @@ class Plan::Update < CommandHandler::Command
     validates :name, presence: true
   end
 
-  def execute
-    if (plan = Plan.find_by(account_id:, plan_id:))
-      plan
-        .update_with_response(name:)
+  delegate :account_id, :plan_id, :name, to: :form
 
-      Response.success(plan.to_struct)
-    else
-      Response.failure(
-        Errors::RecordNotFoundError
-          .build(form:)
-      )
-    end
+  def execute
+    Plan::Find
+      .call(account_id:, plan_id:)
+      .and_then do
+        Plan
+          .find_by(id: plan_id)
+          .update_with_response(name:)
+          .and_then do |plan|
+            Response.success(plan.to_struct)
+          end
+      end
   end
 end

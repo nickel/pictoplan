@@ -10,7 +10,7 @@ module WithResponse
       Response.success(self)
     else
       Response.failure(
-        JT::Errors::Error.build(
+        Errors::Error.build(
           code: :cant_be_saved,
           message: errors.full_messages.to_sentence,
           data: errors.details
@@ -24,7 +24,7 @@ module WithResponse
       Response.success(self)
     else
       Response.failure(
-        JT::Errors::Error.build(
+        Errors::Error.build(
           code: :cant_be_updated,
           message: errors.full_messages.to_sentence,
           data: errors.details
@@ -38,7 +38,7 @@ module WithResponse
       Response.success(self)
     else
       Response.failure(
-        JT::Errors::Error.build(
+        Errors::Error.build(
           code: :cant_be_destroyed,
           message: errors.full_messages.to_sentence,
           data: errors.details
