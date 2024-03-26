@@ -18,10 +18,10 @@
         <%= link_to "PictoPlan", root_path %>
       </h1>
 
-      <% if user_signed_in? %>
+      <% if account_signed_in? %>
         <p>
-          <span class="font-bold"><%= current_user.email %></span> |
-          <%= link_to "Sign out", destroy_user_session_path, data: { "turbo-method": :delete } %>
+          <span class="font-bold"><%= current_account.email %></span> |
+          <%= link_to "Sign out", destroy_account_session_path, data: { "turbo-method": :delete } %>
         </p>
       <% end %>
     </header>
