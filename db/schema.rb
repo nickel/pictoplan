@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_26_153956) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_27_091940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_153956) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "events", force: :cascade do |t|
+    t.bigint "plan_id", null: false
+    t.bigint "picto_id", null: false
+    t.string "title"
+    t.integer "day_of_the_week", null: false
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["picto_id"], name: "index_events_on_picto_id"
+    t.index ["plan_id"], name: "index_events_on_plan_id"
+  end
+
   create_table "pictos", force: :cascade do |t|
     t.string "external_source"
     t.string "external_id"
@@ -76,5 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_153956) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "pictos"
+  add_foreign_key "events", "plans"
   add_foreign_key "plans", "accounts"
 end
