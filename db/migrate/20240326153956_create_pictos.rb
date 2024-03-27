@@ -8,7 +8,7 @@ class CreatePictos < ActiveRecord::Migration[7.1]
 
       t.jsonb :data
 
-      t.boolean :active, default: true
+      t.boolean :enabled, default: true
 
       t.timestamps
     end

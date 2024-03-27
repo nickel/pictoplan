@@ -7,7 +7,7 @@ class Picto::Create < CommandHandler::Command
     attribute :keyword, :string
     attribute :external_id, :integer
     attribute :external_source, :string
-    attribute :active, :boolean
+    attribute :enabled, :boolean, default: true
 
     attribute :image
     attribute :data
@@ -17,7 +17,7 @@ class Picto::Create < CommandHandler::Command
 
   def call
     Picto
-      .new(keyword:, external_id:, external_source:, active:, data:)
+      .new(keyword:, external_id:, external_source:, enabled:, data:)
       .save_with_response
       .and_then do |picto|
         picto.image.attach(io: File.open(image), filename: "image.png") if image
