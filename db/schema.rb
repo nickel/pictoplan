@@ -59,7 +59,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_26_153956) do
     t.string "external_id"
     t.string "keyword"
     t.jsonb "data"
-    t.boolean "active", default: true
+    t.boolean "enabled", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_source", "external_id"], name: "index_pictos_on_external_source_and_external_id", unique: true

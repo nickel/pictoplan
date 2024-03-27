@@ -18,4 +18,12 @@ module Factory
         name: "This is a plan"
       ).value!
   end
+
+  def generate_picto(**input)
+    Picto::Create
+      .call(
+        keyword: "Picto #{Time.now.to_f}",
+        enabled: input.fetch(:enabled, true)
+      ).value!
+  end
 end
