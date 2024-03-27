@@ -1,4 +1,4 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "max-w-sm" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "max-w-sm mx-auto" }) do |f| %>
   <div class="mb-5">
     <%= f.label :email, class: label_classes %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: input_classes %>
@@ -23,6 +23,7 @@
   <div class="actions">
     <%= f.submit "Log in", class: submit_classes %>
   </div>
+
+  <%= render "accounts/shared/links" %>
 <% end %>
 
-<%= render "accounts/shared/links" %>
