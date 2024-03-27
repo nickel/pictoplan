@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     passwords: "accounts/passwords"
   }
 
+  get "/plans/current", to: "plans#current", as: :current_plan
+  resources :plans
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#index"
