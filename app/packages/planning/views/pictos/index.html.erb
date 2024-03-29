@@ -1,0 +1,37 @@
+<%= form_tag pictos_path, method: :get, class: "mb-4 pl-2" do %>
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+  <div class="relative">
+    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+      </svg>
+    </div>
+    
+    <%= text_field_tag :q, params[:q], placeholder: "Buscar por keyword...", class: "block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
+  </div>
+  <div class="mt-2">
+    <%= check_box_tag :only_disabled, checked: params[:only_disabled], class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" %>
+    <%= label_tag :only_disabled, "No disponibles", class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+  </div>
+<% end %>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+  <% @pictos.each do |picto| %>
+    <div class="border-solid border-2 rounded-lg p-2">
+      <%= image_tag picto.image.variant(:thumb), class: "h-auto max-w-full rounded-lg w-40 mx-auto" %>
+      <ul class="max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400 text-center mt-2">
+        <li>
+          <%= picto.keyword %>
+        </li>
+        <li>
+          <%= link_to picto.enabled? ? disable_picto_path(picto.id, q: params[:q], only_disabled: params[:only_disabled]) : enable_picto_path(picto.id, q: params[:q], only_disabled: params[:only_disabled]) do %>
+            <strong>Disponible?</strong> <%= picto.enabled? ? "Sí" : "No" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  <% end %> 
+</div>
+
+<%= paginate @pictos %>
