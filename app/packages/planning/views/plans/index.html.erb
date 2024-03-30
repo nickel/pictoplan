@@ -1,0 +1,21 @@
+<% if @plans.any? %>
+  <% @plans.each do |plan| %>
+    <table>
+      <tbody>
+        <tr>
+          <td><%= plan.name %></td>
+          <td><%= link_to "Gestionar", plan_events_path(plan.id) %></td>
+          <td>
+            <% unless plan.active? %>
+              <%= link_to "Activar", activate_plan_path(plan.id), data: { "turbo-method": :put } %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+
+  <%= link_to "Crea planificación", new_plan_path %>
+<% else %>
+  Sin planificaciones aún. <%= link_to "Crea la primera", new_plan_path %>.
+<% end %>

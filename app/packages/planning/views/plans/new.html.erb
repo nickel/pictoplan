@@ -1,0 +1,6 @@
+<h2>Nueva planificación</h2>
+
+<%= form_for @plan, url: plans_path do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit "Dale" %>
+<% end %>

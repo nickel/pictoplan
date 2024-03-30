@@ -1,0 +1,27 @@
+<% if @events.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Day of the week</th>
+        <th>Título</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td>
+            <%= day_to_name(event.day_of_the_week) %>
+          </td>
+          <td>
+            <%= event.title %>
+          </td>
+          <td></td>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to "Nuevo evento", new_plan_event_path(@plan.id) %>
+<% else %>
+  Sin eventos todavía. <%= link_to "Crea el primero", new_plan_event_path(@plan.id) %>.
+<% end %>
