@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def day_to_name(day_of_the_week)
-    %w(lunes martes miércoles jueves viernes sábado domingo)[day_of_the_week].capitalize
+  def day_to_name(index)
+    days_of_week.find { |day_of_week| day_of_week.id == index }.title
   end
 
   def days_of_week
-    [1, 2, 3, 4, 5, 6, 0].map do |day_of_week|
-      CustomStruct.new(id: day_of_week, title: I18n.t("date.day_names")[day_of_week])
+    @days_of_week = [1, 2, 3, 4, 5, 6, 0].map do |day_of_week|
+      CustomStruct.new(
+        id: day_of_week,
+        title: I18n.t("date.day_names")[day_of_week],
+        today?: Date.today.wday == day_of_week
+      )
     end
   end
 
