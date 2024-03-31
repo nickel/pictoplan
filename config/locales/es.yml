@@ -1,0 +1,16 @@
+es:
+  devise:
+    shared:
+      login: Acceder
+      signup: Regístrate
+      forgot_password?: ¿Olvidaste la contraseña?
+    sessions:
+      login: Acceder
+      password: Contraseña
+      remember_me: Recuérdame
+    registrations:
+      password: Contraseña
+      password_confirmation: Confirma contraseña
+      signup: Registrar
+    password:
+      send_me_instructions: Mándame las intrucciones para cambiar la contraseña

@@ -20,6 +20,8 @@ module Pictoplan
 
     config.paths.add "app/packages", glob: "*/{*,*/concerns}", eager_load: true
 
+    config.i18n.default_locale = :es
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
