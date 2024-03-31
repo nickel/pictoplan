@@ -1,27 +1,43 @@
 <% if @events.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Day of the week</th>
-        <th>Título</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @events.each do |event| %>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-10">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
-          <td>
-            <%= day_to_name(event.day_of_the_week) %>
-          </td>
-          <td>
-            <%= event.title %>
-          </td>
-          <td></td>
-      <% end %>
-    </tbody>
-  </table>
+          <th scope="col" class="px-6 py-3">
+            Día de la semana
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Nombre
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |event| %>
+          <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= day_to_name(event.day_of_the_week) %>
+            </th>
 
-  <%= link_to "Nuevo evento", new_plan_event_path(@plan.id) %>
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <%= event.title %>
+            </th>
+            <td class="px-6 py-4">
+              <%= link_to "Editar", edit_plan_event_path(@plan.id, event.id), 
+                class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+              -
+              <%= link_to "Eliminar", plan_event_path(@plan.id, event.id), data: { "turbo-method": :delete },
+                class: "font-medium text-blue-600 dark:text-blue-500 hover:underline" %> 
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "Crea evento", new_plan_event_path(@plan.id), class: submit_classes %>
 <% else %>
   Sin eventos todavía. <%= link_to "Crea el primero", new_plan_event_path(@plan.id) %>.
 <% end %>

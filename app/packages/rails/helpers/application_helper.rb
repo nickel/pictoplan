@@ -5,6 +5,12 @@ module ApplicationHelper
     %w(lunes martes miércoles jueves viernes sábado domingo)[day_of_the_week].capitalize
   end
 
+  def days_of_week
+    [1, 2, 3, 4, 5, 6, 0].map do |day_of_week|
+      CustomStruct.new(id: day_of_week, title: I18n.t("date.day_names")[day_of_week])
+    end
+  end
+
   def input_classes
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " \
       "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 " \

@@ -1,19 +1,7 @@
-<h2>Nuevo evento</h2>
+<%= form_for @event_form, url: plan_events_path(@plan.id), html: { class: "max-w-sm mx-auto mt-20" } do |f| %>
+  <h2 class="text-2xl mb-5">Nuevo evento</h2>
 
-<%= form_for @event, url: plan_events_path(@plan.id) do |f| %>
-  <div>
-    <%= f.label :picto_id, "Picto" %>
-    <%= f.collection_select :picto_id, Picto::FindAll.call(enabled: true).value!, :id, :keyword, include_blank: true %>
-  </div>
+  <%= render "form", f: f %>
 
-  <div>
-    <%= f.label :title, "Título" %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div>
-    <%= f.label :day_of_the_week, "Día de la semana" %>
-    <%= f.text_field :day_of_the_week %>
-  </div>
-  <%= f.submit "Dale" %>
+  <%= f.submit "Crear", class: submit_classes %>
 <% end %>
