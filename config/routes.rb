@@ -8,7 +8,17 @@ Rails.application.routes.draw do
   }
 
   get "/plans/current", to: "plans#current", as: :current_plan
-  resources :plans
+
+  resources :plans do
+    put "activate", on: :member
+
+    resources :events, controller: "plans/events"
+  end
+
+  resources :pictos do
+    get "enable", on: :member
+    get "disable", on: :member
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 

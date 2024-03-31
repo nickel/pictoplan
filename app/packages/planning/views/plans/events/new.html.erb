@@ -1,0 +1,7 @@
+<%= form_for @event_form, url: plan_events_path(@plan.id), html: { class: "max-w-sm mx-auto mt-20" } do |f| %>
+  <h2 class="text-2xl mb-5">Nuevo evento</h2>
+
+  <%= render "form", f: f %>
+
+  <%= f.submit "Crear", class: submit_classes %>
+<% end %>

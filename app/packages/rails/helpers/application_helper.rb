@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def day_to_name(index)
+    days_of_week.find { |day_of_week| day_of_week.id == index }.title
+  end
+
+  def days_of_week
+    @days_of_week = [1, 2, 3, 4, 5, 6, 0].map do |day_of_week|
+      CustomStruct.new(
+        id: day_of_week,
+        title: I18n.t("date.day_names")[day_of_week],
+        today?: Date.today.wday == day_of_week
+      )
+    end
+  end
+
   def input_classes
     "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " \
       "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 " \
@@ -12,8 +26,6 @@ module ApplicationHelper
   end
 
   def submit_classes
-    "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 " \
-    "font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 " \
-    "dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    "bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded"
   end
 end

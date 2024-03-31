@@ -1,11 +1,11 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "max-w-sm mx-auto" }) do |f| %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "max-w-sm mx-auto mt-20" }) do |f| %>
   <div class="mb-5">
     <%= f.label :email, class: label_classes %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: input_classes %>
   </div>
 
   <div class="mb-5">
-    <%= f.label :password, class: label_classes %>
+    <%= f.label :password, I18n.t("devise.sessions.password"), class: label_classes %>
     <%= f.password_field :password, autocomplete: "current-password", class: input_classes %>
   </div>
 
@@ -15,14 +15,12 @@
         <%= f.check_box :remember_me, class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 
         focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 
         dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" %>
-        <%= f.label :remember_me, class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+        <%= f.label :remember_me, I18n.t("devise.sessions.remember_me"), class: "ms-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
       </div>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: submit_classes %>
-  </div>
+  <%= f.submit I18n.t("devise.sessions.login"), class: submit_classes %>
 
   <%= render "accounts/shared/links" %>
 <% end %>

@@ -1,0 +1,7 @@
+<%= form_for @plan_form, url: plans_path, html: { class: "max-w-sm mx-auto mt-20" } do |f| %>
+  <h2 class="text-2xl mb-5">Nueva planificación</h2>
+
+  <%= render "form", f: f %>
+
+  <%= f.submit "Crear", class: submit_classes %>
+<% end %>
