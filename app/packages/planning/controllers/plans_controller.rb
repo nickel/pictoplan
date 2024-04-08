@@ -67,9 +67,11 @@ class PlansController < ApplicationController
   end
 
   def current
-    @plan = Plan::FindCurrent.call(
+    Plan::FindCurrent.call(
       account_id: current_account.id
-    ).value
+    ).and_then do |plan|
+      @plan = plan
+    end
   end
 
   def destroy
