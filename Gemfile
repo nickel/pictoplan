@@ -21,6 +21,8 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 gem "turbo-rails"
 
+gem "faraday"
+
 group :development, :test do
   gem "debug", platforms: %i(mri windows)
 end
