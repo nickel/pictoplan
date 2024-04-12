@@ -2,6 +2,7 @@
 
 class PictosController < ApplicationController
   before_action :authenticate_account!
+  before_action :ensure_admin!
 
   def index
     @pictos = Picto::FindAll
@@ -24,5 +25,11 @@ class PictosController < ApplicationController
       .call(picto_id: params[:id])
 
     redirect_to pictos_path(q: params[:q], only_disabled: params[:only_disabled])
+  end
+
+  private
+
+  def ensure_admin!
+    redirect_to root_path unless current_account.admin?
   end
 end
