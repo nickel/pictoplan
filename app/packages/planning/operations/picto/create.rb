@@ -24,5 +24,7 @@ class Picto::Create < CommandHandler::Command
 
         Response.success(picto.to_struct)
       end
+  rescue TypeError
+    # nothing
   end
 end
