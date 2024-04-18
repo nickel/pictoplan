@@ -14,7 +14,7 @@ class Event::Create < CommandHandler::Command
 
   def call
     Event
-      .new(plan_id:, picto_id:, title:, day_of_the_week:, position: 0)
+      .new(plan_id:, picto_id:, title:, day_of_the_week:)
       .save_with_response
       .and_then do |event|
         Response.success(event.to_struct)

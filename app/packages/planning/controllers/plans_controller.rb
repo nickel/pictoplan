@@ -71,6 +71,10 @@ class PlansController < ApplicationController
       account_id: current_account.id
     ).and_then do |plan|
       @plan = plan
+
+      @events = Event::FindAll
+        .call(plan_id: @plan.id)
+        .value!
     end
   end
 
