@@ -39,5 +39,5 @@
 
   <%= link_to "Crea evento", new_plan_event_path(@plan.id), class: submit_classes %>
 <% else %>
-  Sin eventos todavía. <%= link_to "Crea el primero", new_plan_event_path(@plan.id) %>.
+  Sin eventos todavía. <%= link_to "Crea el primero", new_plan_event_path(@plan.id), class: "underline" %>.
 <% end %>

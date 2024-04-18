@@ -1,7 +1,7 @@
 <% if @plan.present? %>
   <div class="grid grid-cols-7 gap-4">
     <% days_of_week.each do |day_of_week| %>
-      <div class="<%= "border-8 border-orange-400" if day_of_week.today? %> p-2">
+      <div class="<%= "border-8 border-orange-400" if day_of_week.today? %>">
         <div class="flex justify-center items-center">
           <div class="h-28 w-28">
             <% if day_of_week.today? %>
