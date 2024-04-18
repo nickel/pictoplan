@@ -18,7 +18,10 @@
           <ul data-controller="position">
             <% @events.select {|event| event.day_of_the_week == day_of_week.id }.each do |event| %>
               <%= content_tag :li, data: { sgid: event.to_sgid_param } do %>
-                <%= image_tag event.picto.image.variant(:mini_thumb), class: "h-20 w-20" %>
+                <div class="flex items-center">
+                  <i class="fa-solid fa-grip-lines text-2xl float-left"></i>
+                  <%= image_tag event.picto.image.variant(:mini_thumb), class: "h-20 w-20" %>
+                </div>
               <% end %>
             <% end %>
           </ul>
