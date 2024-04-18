@@ -1,22 +1,26 @@
 <% if @plan.present? %>
   <div class="grid grid-cols-7 gap-4">
     <% days_of_week.each do |day_of_week| %>
-      <div class="<%= "border-8 border-orange-400" if day_of_week.today? %>">
-        <div class="flex justify-center items-center">
-          <div class="h-28 w-28">
-            <% if day_of_week.today? %>
-              <%= image_tag "hoy.png"%>
-            <% end %>
-          </div>
-        </div>
-
-        <h3 class="text-center mb-4"><%= day_of_week.title %></h3>
-
-        <% Event.where(plan_id: @plan.id, day_of_the_week: day_of_week.id).each do |event| %>
+      <div class="border-8 <%= day_of_week.today? ? "border-orange-400" : "border-gray-50" %> p-1">
+        <header class="bg-gray-50">
           <div class="flex justify-center items-center">
-            <%= image_tag event.picto.image.variant(:mini_thumb) %>
+            <div class="h-14 w-14">
+              <% if day_of_week.today? %>
+                <%= image_tag "hoy.png"%>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+
+          <h3 class="text-center mb-4 font-bold uppercase"><%= day_of_week.title %></h3>
+        </header>
+
+        <section>
+          <% Event.where(plan_id: @plan.id, day_of_the_week: day_of_week.id).each do |event| %>
+            <div class="flex justify-center items-center">
+              <%= image_tag event.picto.image.variant(:mini_thumb), class: "h-20 w-20" %>
+            </div>
+          <% end %>
+        </section>
       </div>
     <% end %>
   </div>
