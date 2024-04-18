@@ -15,7 +15,7 @@ class Event::FindAll < CommandHandler::Command
     Response.success(
       Event
         .where(plan_id:)
-        .order(:day_of_the_week)
+        .order(:day_of_the_week, :position)
     )
   end
 end

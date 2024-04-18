@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get "disable", on: :member
   end
 
+  put "/events" => "plans/events#reorder"
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#index"

@@ -3,7 +3,7 @@
 module Plans
   class EventsController < ApplicationController
     before_action :authenticate_account!
-    before_action :load_plan
+    before_action :load_plan, except: %w(reorder)
     before_action :load_event, only: %w(edit update destroy)
 
     def index
@@ -61,6 +61,18 @@ module Plans
       )
 
       redirect_to plan_events_path(@plan.id)
+    end
+
+    def reorder
+      event = GlobalID::Locator.locate_signed(params[:sgid])
+
+      Event::Reorder.call(
+        plan_id: event.plan_id,
+        event_id: event.id,
+        position: params[:position]
+      )
+
+      head :no_content
     end
 
     private

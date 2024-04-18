@@ -14,12 +14,14 @@
           <h3 class="text-center mb-4 font-bold uppercase"><%= day_of_week.title %></h3>
         </header>
 
-        <section>
-          <% Event.where(plan_id: @plan.id, day_of_the_week: day_of_week.id).each do |event| %>
-            <div class="flex justify-center items-center">
-              <%= image_tag event.picto.image.variant(:mini_thumb), class: "h-20 w-20" %>
-            </div>
-          <% end %>
+        <section class="flex justify-center items-center">
+          <ul data-controller="position">
+            <% @events.select {|event| event.day_of_the_week == day_of_week.id }.each do |event| %>
+              <%= content_tag :li, data: { sgid: event.to_sgid_param } do %>
+                <%= image_tag event.picto.image.variant(:mini_thumb), class: "h-20 w-20" %>
+              <% end %>
+            <% end %>
+          </ul>
         </section>
       </div>
     <% end %>
